@@ -15,6 +15,8 @@ Data analysis on accidents that occurred in the state of "Minas Gerais", Brazil
 ![Bar plot of mean age of people who died in traffic accidents in Belo Horizonte](https://github.com/vncsmyrnk/accidents-analysis-mg/blob/main/src/output/mean_age_per_year_in_bh.png)
 <br>
 ![Percentages of traffic accidents per city](https://github.com/vncsmyrnk/accidents-analysis-mg/blob/main/src/output/percentages_of_traffic_accidents_per_city.png)
+<br>
+![traffic accidents by month](https://github.com/vncsmyrnk/accidents-analysis-mg/blob/main/src/output/traffic_accidents_by_month_plot.png)
 
 ## Run
 

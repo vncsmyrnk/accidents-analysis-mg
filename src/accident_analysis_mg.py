@@ -10,6 +10,7 @@ def generate_stats():
     df = clean_data(df)
     generate_mean_age_per_year_in_bh_plot(df)
     generate_percentages_of_traffic_accidents_per_city(df)
+    generate_traffic_accidents_by_month_plot(df)
 
 
 def get_dataframe():
@@ -30,6 +31,7 @@ def clean_data(df):
     """
     df["date"] = pd.to_datetime(df["dt_obito"], format="%d/%m/%Y")
     df["year"] = df["date"].dt.year
+    df["month"] = df["date"].dt.month_name()
     df["date_birth"] = pd.to_datetime(df["dt_nascimento"], format="%d/%m/%Y")
     df["age"] = df["nu_idade"]
     df["sex"] = df["sg_sexo"].replace(
@@ -37,7 +39,7 @@ def clean_data(df):
     df["city"] = df["co_municipio_ibge_ocorrencia"]
     df["id_accident_cause"] = df["co_cid_causa_basica"]
     df["desc_accident_cause"] = df["desc_cid_causa_basica"]
-    df = df[["date", "year", "date_birth", "age", "sex",
+    df = df[["date", "year", "month", "date_birth", "age", "sex",
              "city", "id_accident_cause", "desc_accident_cause"]]
     return df
 
@@ -76,6 +78,23 @@ def generate_percentages_of_traffic_accidents_per_city(df):
     plt.ylabel("City")
     plt.yticks(rotation=45, horizontalalignment="right")
     plt.savefig("./output/percentages_of_traffic_accidents_per_city.png")
+
+
+def generate_traffic_accidents_by_month_plot(df):
+    """
+    Generate the "Traffic accidents by month" plot
+    """
+    data = round(df["month"].value_counts(normalize=True) * 100, 2)
+    data = data.sort_values().reset_index()
+
+    plt.figure(figsize=(8, 6))
+    plt.bar(data["month"], data["proportion"])
+    add_labels_on_bars(data["month"], data["proportion"])
+    plt.title("Traffic accidents by month")
+    plt.xlabel("Month")
+    plt.ylabel("Percentage (%)")
+    plt.xticks(rotation=45, horizontalalignment="right")
+    plt.savefig("./output/traffic_accidents_by_month_plot.png")
 
 
 # Utils #
