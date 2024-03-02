@@ -13,5 +13,7 @@ Data analysis on accidents that occurred in the state of "Minas Gerais", Brazil
 - Using docker:
 
 ```bash
-docker run --rm -it --name acidentes --workdir /var/app -v accident-analysis-mg.py:/var/app/accident-analysis-mg.py python:3-alpine sh
+docker run --rm -it --name aamg --workdir /var/app -v ./src:/var/app python:3-alpine sh
+pip install -r requirements.txt # Inside container
+python accidents_analysis_mg.py # Inside container
 ```
