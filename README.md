@@ -10,7 +10,7 @@
 
 Data analysis on traffic accidents that occurred in the state of "Minas Gerais", Brazil.
 
-The data source is located on [Portal de Dados Abertos do Estado de Minas Gerais website](https://dados.mg.gov.br/dataset/dados_acidentes_terrestres/resource/51c9d227-5ac8-44d5-9b8b-fc894df8032a).
+The data source is located on [Portal de Dados Abertos do Estado de Minas Gerais website](https://dados.mg.gov.br/dataset/dados_acidentes_terrestres/resource/51c9d227-5ac8-44d5-9b8b-fc894df8032a). The data collected spans from 2010 to 2024.
 
 The purpose of this study is to provide insights for future improvements to traffic legislation, in order to make it safer.
 
