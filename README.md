@@ -12,9 +12,7 @@ Data analysis on accidents that occurred in the state of "Minas Gerais", Brazil
 
 ## Results
 
-### Mean age on traffic accident in Belo Horizonte from 2010 to 2024
-
-![clocked app](https://github.com/vncsmyrnk/accidents-analysis-mg/blob/main/src/output/mean_age_per_year_in_bh.png)
+![Bar plot of mean age of people who died in traffic accidents in Belo Horizonte](https://github.com/vncsmyrnk/accidents-analysis-mg/blob/main/src/output/mean_age_per_year_in_bh.png)
 
 ## Run
 

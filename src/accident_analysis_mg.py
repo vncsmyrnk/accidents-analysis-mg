@@ -42,14 +42,16 @@ def clean_data(df):
 
 
 def generate_mean_age_per_year_in_bh_graphic(df):
-    grouped = df[df["city"] == "Belo Horizonte"].groupby(["year"]).mean("age").sort_values(by="year")
+    grouped = df[df["city"] == "Belo Horizonte"].groupby(["year"])
+    grouped = grouped.mean("age").sort_values(by="year")
+
     plt.bar(grouped.index, grouped["age"])
-    plt.title("Bar plot of average age of people who died in traffic accidents (from sample)")
+    plt.title("Average age of people who died"
+              " in traffic accidents in Belo Horizonte")
     plt.xlabel("Year")
     plt.ylabel("Age")
     plt.xticks(rotation=45, horizontalalignment='right')
     plt.savefig("./output/mean_age_per_year_in_bh.png")
-    return grouped
 
 
 if __name__ == "__main__":
