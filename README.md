@@ -3,20 +3,20 @@
 ![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
 ![GitHub Actions](https://img.shields.io/badge/github%20actions-%232671E5.svg?style=for-the-badge&logo=githubactions&logoColor=white)
 <br>
-![CI](https://github.com/vncsmyrnk/accidents-analysis-mg/actions/workflows/ci.yml/badge.svg)
+![CI](https://github.com/vncsmyrnk/traffic-accidents-analysis-mg/actions/workflows/ci.yml/badge.svg)
 <br>
 
-# Accidents Analysis in Minas Gerais
+# Traffic Accident Analysis in Minas Gerais
 
-Data analysis on accidents that occurred in the state of "Minas Gerais", Brazil
+Data analysis on traffic accidents that occurred in the state of "Minas Gerais", Brazil
 
 ## Results
 
-![Bar plot of mean age of people who died in traffic accidents in Belo Horizonte](https://github.com/vncsmyrnk/accidents-analysis-mg/blob/main/src/output/mean_age_per_year_in_bh.png)
+![Bar plot of mean age of people who died in traffic accidents in Belo Horizonte](https://github.com/vncsmyrnk/traffic-accidents-analysis-mg/blob/main/src/output/mean_age_per_year_in_bh.png)
 <br>
-![Percentages of traffic accidents per city](https://github.com/vncsmyrnk/accidents-analysis-mg/blob/main/src/output/percentages_of_traffic_accidents_per_city.png)
+![Percentages of traffic accidents per city](https://github.com/vncsmyrnk/traffic-accidents-analysis-mg/blob/main/src/output/percentages_of_traffic_accidents_per_city.png)
 <br>
-![traffic accidents by month](https://github.com/vncsmyrnk/accidents-analysis-mg/blob/main/src/output/traffic_accidents_by_month_plot.png)
+![traffic accidents by month](https://github.com/vncsmyrnk/traffic-accidents-analysis-mg/blob/main/src/output/traffic_accidents_by_month_plot.png)
 
 ## Run
 
