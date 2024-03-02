@@ -8,7 +8,8 @@ def generate_stats():
     """
     df = get_dataframe()
     df = clean_data(df)
-    generate_mean_age_per_year_in_bh_graphic(df)
+    generate_mean_age_per_year_in_bh_plot(df)
+    generate_percentages_of_traffic_accidents_per_city(df)
 
 
 def get_dataframe():
@@ -41,17 +42,52 @@ def clean_data(df):
     return df
 
 
-def generate_mean_age_per_year_in_bh_graphic(df):
-    grouped = df[df["city"] == "Belo Horizonte"].groupby(["year"])
-    grouped = grouped.mean("age").sort_values(by="year")
+def generate_mean_age_per_year_in_bh_plot(df):
+    """
+    Generate the "Average age of people who died in traffic
+    accidents in Belo Horizonte" plot
+    """
+    data = df[df["city"] == "Belo Horizonte"].groupby(["year"])
+    data = data.mean("age").sort_values(by="year").reset_index()
 
-    plt.bar(grouped.index, grouped["age"])
+    plt.figure(figsize=(8, 6))
+    plt.bar(data["year"], data["age"])
+    add_labels_on_bars(data["year"], data["age"])
     plt.title("Average age of people who died"
               " in traffic accidents in Belo Horizonte")
     plt.xlabel("Year")
     plt.ylabel("Age")
-    plt.xticks(rotation=45, horizontalalignment='right')
+    plt.xticks(rotation=45, horizontalalignment="right")
     plt.savefig("./output/mean_age_per_year_in_bh.png")
+
+
+def generate_percentages_of_traffic_accidents_per_city(df):
+    """
+    Generate the "Percentages of accidents per city" plot
+    """
+    data = round(df["city"].value_counts(normalize=True).head(10) * 100, 2)
+    data = data.sort_values().reset_index()
+
+    plt.figure(figsize=(12, 8))
+    plt.barh(data["city"], data["proportion"])
+    add_labels_on_bars_inverted(data["city"], data["proportion"])
+    plt.title("Percentages of accidents per city")
+    plt.xlabel("Percentage (%)")
+    plt.ylabel("City")
+    plt.yticks(rotation=45, horizontalalignment="right")
+    plt.savefig("./output/percentages_of_traffic_accidents_per_city.png")
+
+
+# Utils #
+
+def add_labels_on_bars(x, y):
+    for i in range(len(x)):
+        plt.text(i, y[i], y[i], ha="center")
+
+
+def add_labels_on_bars_inverted(x, y):
+    for i in range(len(x)):
+        plt.text(y[i], i, y[i], va="center")
 
 
 if __name__ == "__main__":
