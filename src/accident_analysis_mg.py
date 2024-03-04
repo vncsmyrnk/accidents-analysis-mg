@@ -11,7 +11,7 @@ def generate_stats():
     generate_mean_age_per_year_in_bh_plot(df)
     generate_percentages_of_traffic_accidents_per_city(df)
     generate_traffic_accidents_by_month_plot(df)
-    df.to_csv('./output/traffic-accidents-mg.csv')
+    df.to_csv('./output/traffic-accidents-mg.csv', index=False)
 
 
 def get_dataframe():
