@@ -6,15 +6,25 @@ def generate_stats():
     """
     Calculate and display the accident stats
     """
-    df = get_dataframe()
-    df = clean_data(df)
+    df = build_full_dataframe()
     generate_mean_age_per_year_in_bh_plot(df)
     generate_percentages_of_traffic_accidents_per_city(df)
     generate_traffic_accidents_by_month_plot(df)
-    df.to_csv('./output/traffic-accidents-mg.csv', index=False)
+    df.to_csv("./output/traffic-accidents-mg.csv", index=False)
 
 
-def get_dataframe():
+def build_full_dataframe():
+    """
+    Completes all operations to build the final dataframe
+    """
+    df_main = get_main_dataframe()
+    df_loc = get_city_localization_dataframe()
+    df_merged = df_main.merge(df_loc, how="inner", on="city")
+    df_merged = df_merged.drop_duplicates().reset_index(drop=True)
+    return df_merged
+
+
+def get_main_dataframe():
     """
     Get the accidents data and return a pandas dataframe of it
     """
@@ -23,14 +33,24 @@ def get_dataframe():
                "/51c9d227-5ac8-44d5-9b8b-fc894df8032a/download" \
                "/dados_acidentes_terrestres.csv"
     df = pd.read_csv(file_url, delimiter=";")
-    return df
+    return clean_main_df_data(df)
 
 
-def clean_data(df):
+def get_city_localization_dataframe():
     """
-    Clean the dataframe data
+    Get the localization of cities in MG data
+    and return a pandas dataframe of it
     """
+    file_url = "https://raw.githubusercontent.com" \
+               "/alanwillms/geoinfo/master/latitude-longitude-cidades.csv"
+    df = pd.read_csv(file_url, delimiter=";")
+    return clean_city_localization_df_data(df)
 
+
+def clean_main_df_data(df):
+    """
+    Clean the main dataframe data
+    """
     # Create formatted columns
     df["date"] = pd.to_datetime(df["dt_obito"], format="%d/%m/%Y")
     df["year"] = df["date"].dt.year
@@ -46,10 +66,27 @@ def clean_data(df):
              "city", "id_accident_cause", "desc_accident_cause"]]
 
     # Removes null rows
-    df = df[~df['city'].isnull()]
-    df = df[~df['date_birth'].isnull()]
-    df = df[~df['sex'].isnull()]
-    df = df.reset_index(drop=True)
+    df = df[~df["city"].isnull()]
+    df = df[~df["date_birth"].isnull()]
+    df = df[~df["sex"].isnull()]
+
+    df = df.drop_duplicates().reset_index(drop=True)
+
+    return df
+
+
+def clean_city_localization_df_data(df):
+    """
+    Clean the city localization dataframe data
+    """
+    df["city"] = df["municipio"]
+    df["city_code"] = df["id_municipio"]
+    df["city_latitude"] = df["latitude"]
+    df["city_longitude"] = df["longitude"]
+    df = df[df["uf"] == "MG"]
+    df = df[["city", "city_code", "city_latitude", "city_longitude"]]
+
+    df = df.drop_duplicates().reset_index(drop=True)
 
     return df
 
