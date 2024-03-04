@@ -14,6 +14,8 @@ The data source is located on [Portal de Dados Abertos do Estado de Minas Gerais
 
 The purpose of this study is to provide insights for future improvements to traffic legislation, in order to make it safer.
 
+The full visualization of the project is available on [Tableau](https://public.tableau.com/app/profile/vinicius.mayrink/viz/TrafficAccidentAnalysisinMinasGerais/Dashboard1).
+
 ## Results
 
 ![Bar plot of mean age of people who died in traffic accidents in Belo Horizonte](https://github.com/vncsmyrnk/traffic-accidents-analysis-mg/blob/main/src/output/mean_age_per_year_in_bh.png)
