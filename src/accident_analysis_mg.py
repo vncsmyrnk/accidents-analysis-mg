@@ -30,6 +30,8 @@ def clean_data(df):
     """
     Clean the dataframe data
     """
+
+    # Create formatted columns
     df["date"] = pd.to_datetime(df["dt_obito"], format="%d/%m/%Y")
     df["year"] = df["date"].dt.year
     df["month"] = df["date"].dt.month_name()
@@ -42,6 +44,13 @@ def clean_data(df):
     df["desc_accident_cause"] = df["desc_cid_causa_basica"]
     df = df[["date", "year", "month", "date_birth", "age", "sex",
              "city", "id_accident_cause", "desc_accident_cause"]]
+
+    # Removes null rows
+    df = df[~df['city'].isnull()]
+    df = df[~df['date_birth'].isnull()]
+    df = df[~df['sex'].isnull()]
+    df = df.reset_index(drop=True)
+
     return df
 
 
