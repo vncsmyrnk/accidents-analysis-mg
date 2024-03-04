@@ -10,7 +10,14 @@ def generate_stats():
     generate_mean_age_per_year_in_bh_plot(df)
     generate_percentages_of_traffic_accidents_per_city(df)
     generate_traffic_accidents_by_month_plot(df)
+
+    # Different views of the full df
+    df_ta_per_city_and_year = build_traffic_accidents_per_city_and_year_df(df)
+
+    # Export
     df.to_csv("./output/traffic-accidents-mg.csv", index=False)
+    df_ta_per_city_and_year.to_csv(
+            "./output/traffic-accidents-per-city-and-year-mg.csv", index=False)
 
 
 def build_full_dataframe():
@@ -20,6 +27,21 @@ def build_full_dataframe():
     df_main = get_main_dataframe()
     df_loc = get_city_localization_dataframe()
     df_merged = df_main.merge(df_loc, how="inner", on="city")
+    df_merged = df_merged.drop_duplicates().reset_index(drop=True)
+    return df_merged
+
+
+def build_traffic_accidents_per_city_and_year_df(df):
+    """
+    Builds a different view of the full data frame grouping
+    year and city
+    """
+    df_grouped = df.groupby(["city", "year"]).size()
+    df_grouped = df_grouped.to_frame("total_traffic_accidents").reset_index()
+    df_merged = df_grouped.merge(df, how="left", on="city")
+    df_merged["year"] = df_merged["year_x"]
+    df_merged = df_merged[["city", "year", "total_traffic_accidents", "city_code",
+                           "city_latitude", "city_longitude"]]
     df_merged = df_merged.drop_duplicates().reset_index(drop=True)
     return df_merged
 
