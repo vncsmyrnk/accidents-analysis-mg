@@ -156,7 +156,8 @@ def generate_percentages_of_traffic_accidents_per_city(df):
     plt.xlabel("Percentage (%)")
     plt.ylabel("City")
     plt.yticks(rotation=45, horizontalalignment="right")
-    plt.savefig("./output/img/fatal-percentages_of_traffic_accidents_per_city.png")
+    plt.savefig(
+            "./output/img/fatal-percentages_of_traffic_accidents_per_city.png")
 
 
 def generate_traffic_accidents_by_month_plot(df):
