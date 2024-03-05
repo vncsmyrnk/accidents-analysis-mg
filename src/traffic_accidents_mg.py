@@ -46,7 +46,7 @@ def clean_main_df_data(df):
     df["month"] = df["date"].dt.month_name()
     df["state"] = df["uf"]
     df["km"] = pd.to_numeric(df["km"].str.replace(",", "."))
-    df["highway"] = df["br"]
+    df["highway"] = "BR-" + df["br"].astype(str)
     df["city"] = df["municipio"]
     df["latitude"] = pd.to_numeric(df["latitude"].str.replace(",", "."))
     df["longitude"] = pd.to_numeric(df["longitude"].str.replace(",", "."))
@@ -109,8 +109,8 @@ def clean_main_df_data(df):
     df["cause"] = df["cause_translated"]
 
     # Selects only important columns
-    df = df[["date", "year", "month", "state", "km", "city",
-             "latitude", "longitude",
+    df = df[["date", "year", "month", "state", "km", "highway",
+             "city", "latitude", "longitude",
              "cause", "type", "victim_type", "day_part", "road_slope",
              "weather", "track_type", "road_type", "area",
              "people_involved", "dead", "slightly_injured",

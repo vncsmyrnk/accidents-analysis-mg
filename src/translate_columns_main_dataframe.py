@@ -13,10 +13,16 @@ def translate():
     df = tamg.get_main_dataframe()
     translate_cause(df)
 
+
 def translate_cause(df):
+    """
     df_cause = df["cause"].values_count().reset_index()
-    df["translated_cause"] = df["cause"].apply(lambda x: translator.translate(x, dest="en").text)
-    # @TODO Finish this method
+    df["translated_cause"] = df["cause"].apply(
+            lambda x: translator.translate(x, dest="en").text)
+    @TODO Finish this method
+    """
+    return None
+
 
 if __name__ == "__main__":
     translate()
