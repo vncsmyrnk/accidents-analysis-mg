@@ -10,6 +10,7 @@ def generate_stats():
     generate_mean_age_per_year_in_bh_plot(df)
     generate_percentages_of_traffic_accidents_per_city(df)
     generate_traffic_accidents_by_month_plot(df)
+    generate_age_boxplot(df)
 
     # Different views of the full df
     df_ta_per_city_and_year = build_traffic_accidents_per_city_and_year_df(df)
@@ -40,8 +41,8 @@ def build_traffic_accidents_per_city_and_year_df(df):
     df_grouped = df_grouped.to_frame("total_traffic_accidents").reset_index()
     df_merged = df_grouped.merge(df, how="left", on="city")
     df_merged["year"] = df_merged["year_x"]
-    df_merged = df_merged[["city", "year", "total_traffic_accidents", "city_code",
-                           "city_latitude", "city_longitude"]]
+    df_merged = df_merged[["city", "year", "total_traffic_accidents",
+                           "city_code", "city_latitude", "city_longitude"]]
     df_merged = df_merged.drop_duplicates().reset_index(drop=True)
     return df_merged
 
@@ -84,8 +85,10 @@ def clean_main_df_data(df):
     df["city"] = df["co_municipio_ibge_ocorrencia"]
     df["id_accident_cause"] = df["co_cid_causa_basica"]
     df["desc_accident_cause"] = df["desc_cid_causa_basica"]
+    df["accident_occurred"] = 1
     df = df[["date", "year", "month", "date_birth", "age", "sex",
-             "city", "id_accident_cause", "desc_accident_cause"]]
+             "city", "accident_occurred", "id_accident_cause",
+             "desc_accident_cause"]]
 
     # Removes null rows
     df = df[~df["city"].isnull()]
@@ -164,6 +167,17 @@ def generate_traffic_accidents_by_month_plot(df):
     plt.ylabel("Percentage (%)")
     plt.xticks(rotation=45, horizontalalignment="right")
     plt.savefig("./output/traffic_accidents_by_month_plot.png")
+
+
+def generate_age_boxplot(df):
+    """
+    Generate the "Age Box plot" plot
+    """
+    plt.figure(figsize=(8, 6))
+    plt.title("Age Box plot")
+    plt.ylabel("Age")
+    plt.boxplot(df["age"])
+    plt.savefig("./output/age_box_plot.png")
 
 
 # Utils #
