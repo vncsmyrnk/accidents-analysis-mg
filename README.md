@@ -16,14 +16,14 @@ The purpose of this study is to provide insights for future improvements to traf
 
 The full visualization of the project is available on [Tableau](https://public.tableau.com/app/profile/vinicius.mayrink/viz/TrafficAccidentAnalysisinMinasGerais/Dashboard1).
 
-## Results
+## Partial results
 
-![Bar plot of mean age of people who died in traffic accidents in Belo Horizonte](https://github.com/vncsmyrnk/traffic-accidents-analysis-mg/blob/main/src/output/mean_age_per_year_in_bh.png)
+![Bar plot of mean age of people who died in traffic accidents in Belo Horizonte](https://github.com/vncsmyrnk/traffic-accidents-analysis-mg/blob/main/src/output/fatal-mean_age_per_year_in_bh.png)
 <br>
-![Percentages of traffic accidents per city](https://github.com/vncsmyrnk/traffic-accidents-analysis-mg/blob/main/src/output/percentages_of_traffic_accidents_per_city.png)
+![Percentages of traffic accidents per city](https://github.com/vncsmyrnk/traffic-accidents-analysis-mg/blob/main/src/output/fatal-percentages_of_traffic_accidents_per_city.png)
 <br>
-![Traffic accidents by month](https://github.com/vncsmyrnk/traffic-accidents-analysis-mg/blob/main/src/output/traffic_accidents_by_month_plot.png)
-![Age Box plot](https://github.com/vncsmyrnk/traffic-accidents-analysis-mg/blob/main/src/output/age_box_plot.png)
+![Traffic accidents by month](https://github.com/vncsmyrnk/traffic-accidents-analysis-mg/blob/main/src/output/fatal-traffic_accidents_by_month_plot.png)
+![Age Box plot](https://github.com/vncsmyrnk/traffic-accidents-analysis-mg/blob/main/src/output/fatal-age_box_plot.png)
 
 ## Run
 
