@@ -12,11 +12,13 @@ Data analysis on traffic accidents that occurred in the state of "Minas Gerais",
 
 The data source is located on [Portal de Dados Abertos do Estado de Minas Gerais website](https://dados.mg.gov.br/dataset/dados_acidentes_terrestres/resource/51c9d227-5ac8-44d5-9b8b-fc894df8032a). The data collected spans from 2010 to 2024. City locations were obtained from the [geoinfo GitHub repository](https://github.com/alanwillms/geoinfo). Other data source used was [Dados abertos da Policia Rodoviaria Federal](https://www.gov.br/prf/pt-br/acesso-a-informacao/dados-abertos/dados-abertos-acidentes).
 
-The first two were used to build the [Fatal Traffic Accident Analysis in Minas Gerais](https://public.tableau.com/app/profile/vinicius.mayrink/viz/TrafficAccidentAnalysisinMinasGerais/Dashboard1) Tableau visualization. The second one was used to build the [Traffic Accident Analysis in Minas Gerais]() Tableau visualization.
+The first two were used to build the [Fatal Traffic Accident Analysis in Minas Gerais](https://public.tableau.com/app/profile/vinicius.mayrink/viz/TrafficAccidentAnalysisinMinasGerais/Dashboard1) Tableau visualization. The second one was used to build the [Traffic Accident Analysis on Federal Highways in Minas Gerais](https://public.tableau.com/app/profile/vinicius.mayrink/viz/TrafficAccidentAnalysisonFederalhighwaysinMinasGerais/MainDashboard) Tableau visualization.
 
 The purpose of this study is to provide insights for future improvements to traffic legislation, in order to make it safer.
 
-The full visualization of the project is available on [Tableau](https://public.tableau.com/app/profile/vinicius.mayrink/viz/TrafficAccidentAnalysisinMinasGerais/Dashboard1).
+Available visualizations:
+- [Traffic Accident Analysis on Federal Highways in Minas Gerais](https://public.tableau.com/app/profile/vinicius.mayrink/viz/TrafficAccidentAnalysisonFederalhighwaysinMinasGerais/MainDashboard)
+- [Fatal Traffic Accident Analysis in Minas Gerais](https://public.tableau.com/app/profile/vinicius.mayrink/viz/TrafficAccidentAnalysisinMinasGerais/Dashboard1)
 
 ## Partial results
 

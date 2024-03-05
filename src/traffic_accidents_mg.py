@@ -28,16 +28,28 @@ def get_main_dataframe():
     return clean_main_df_data(combined_df)
 
 
+def get_translated_cause_dataframe():
+    """
+    Get the accidents data and return a pandas dataframe of it
+    """
+    df = pd.read_csv("./data/cause_translated.csv")
+    return df
+
+
 def clean_main_df_data(df):
     """
     Clean the main dataframe data
     """
+    # Create formatted columns
     df["date"] = pd.to_datetime(df["data_inversa"])
     df["year"] = df["date"].dt.year
     df["month"] = df["date"].dt.month_name()
     df["state"] = df["uf"]
     df["km"] = pd.to_numeric(df["km"].str.replace(",", "."))
+    df["highway"] = df["br"]
     df["city"] = df["municipio"]
+    df["latitude"] = pd.to_numeric(df["latitude"].str.replace(",", "."))
+    df["longitude"] = pd.to_numeric(df["longitude"].str.replace(",", "."))
     df["cause"] = df["causa_acidente"]
     df["type"] = df["tipo_acidente"]
     df["victim_type"] = df["classificacao_acidente"]
@@ -57,12 +69,48 @@ def clean_main_df_data(df):
     df["vehicles"] = df["veiculos"]
     df["accident_occurred"] = 1
 
+    # Removes null rows
+    df = df[~df["km"].isnull()]
+    df = df[~df["type"].isnull()]
+    # @TODO manually fill empty latitudes with city latitude
+    df = df[~df["latitude"].isnull()]
+    # @TODO manually fill empty longitude with city longitudes
+    df = df[~df["longitude"].isnull()]
+
+    # Adapts and cleans categorization
+    df["state"] = df["state"].replace(
+            {"MG": "Minas Gerais", "SC": "Santa Catarina", "PR": "Paraná",
+             "RS": "Rio Grande do Sul", "RJ": "Rio de Janeiro",
+             "SP": "São Paulo", "BA": "Bahia", "GO": "Goiás",
+             "PE": "Pernambuco", "ES": "Espírito Santo", "MT": "Mato Grosso",
+             "CE": "Ceará", "MS": "Mato Grosso do Sul", "PB": "Paraíba",
+             "RO": "Rondônia", "RN": "Rio Grande do Norte", "PI": "Piauí",
+             "MA": "Maranhão", "PA": "Pará", "DF": "Distrito Federal",
+             "AL": "Alagoas", "TO": "Tocantis", "SE": "Sergipe", "AC": "Acre",
+             "RR": "Roraima", "AP": "Amapá", "AM": "Amazonas"})
     df["victim_type"] = df["victim_type"].replace(
             {"Com Vítimas Feridas": "Injured victims",
              "Sem Vítimas": "No victims",
              "Com Vítimas Fatais": "Fatal injured victims"})
+    df["track_type"] = df["track_type"].replace(
+            {"Simples": "Single-lane road",
+             "Dupla": "Dual-lane road",
+             "Múltipla": "Multi-lane road"})
 
+    # Filters
+    df = df[df["state"] == "Minas Gerais"]
+    # Brasil latitude and longitude limits
+    df = df[(df["latitude"] > -34) & (df["latitude"] < 6)]
+    df = df[(df["longitude"] > -74) & (df["longitude"] < -34)]
+
+    # Adds mapped categories
+    df_translated_cause = get_translated_cause_dataframe()
+    df = df.merge(df_translated_cause, how="left", on="cause")
+    df["cause"] = df["cause_translated"]
+
+    # Selects only important columns
     df = df[["date", "year", "month", "state", "km", "city",
+             "latitude", "longitude",
              "cause", "type", "victim_type", "day_part", "road_slope",
              "weather", "track_type", "road_type", "area",
              "people_involved", "dead", "slightly_injured",
