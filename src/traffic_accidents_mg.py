@@ -46,7 +46,7 @@ def clean_main_df_data(df):
     df["month"] = df["date"].dt.month_name()
     df["state"] = df["uf"]
     df["km"] = pd.to_numeric(df["km"].str.replace(",", "."))
-    df["highway"] = "BR-" + df["br"].astype(str)
+    df["highway"] = "BR-" + df["br"].astype('Int64').astype(str)
     df["city"] = df["municipio"]
     df["latitude"] = pd.to_numeric(df["latitude"].str.replace(",", "."))
     df["longitude"] = pd.to_numeric(df["longitude"].str.replace(",", "."))
